@@ -1,4 +1,4 @@
-package blöcke.myObjStuff;
+package sketchup.files;
 
 
 import org.lwjgl.util.vector.Vector3f;
@@ -7,7 +7,7 @@ import vbo.models.TexturedModel;
 import java.util.List;
 
 /**
- * Created by levin on 13.05.2017.
+ * Created by Levin on 05.06.2017.
  */
 public class ObjEntity {
 
@@ -25,20 +25,16 @@ public class ObjEntity {
         this.scale = scale;
     }
 
-    public void increasePosition(float dx, float dy, float dz){
-        this.position.x += dx;
-        this.position.y += dy;
-        this.position.z += dz;
+    public void increasePosition(float deltaX, float deltaY, float deltaZ){
+        position.x += deltaX;
+        position.y += deltaY;
+        position.z += deltaZ;
     }
 
-    public void increaseRotation(float dx, float dy, float dz){
-        this.rotX += dx;
-        this.rotY += dy;
-        this.rotZ += dz;
-    }
-
-    public List<TexturedModel> getModels() {
-        return models;
+    public void increaseRotation(float deltaX, float deltaY, float deltaZ){
+        rotX += deltaX;
+        rotY += deltaY;
+        rotZ += deltaZ;
     }
 
     public Vector3f getPosition() {
@@ -59,5 +55,9 @@ public class ObjEntity {
 
     public float getScale() {
         return scale;
+    }
+
+    public List<TexturedModel> getModels(){
+        return models;
     }
 }

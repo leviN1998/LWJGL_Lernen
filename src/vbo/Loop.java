@@ -9,6 +9,9 @@ import org.lwjgl.Sys;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
+import sketchup.files.ObjEntity;
+import sketchup.loaders.SketchUpLoader;
+import sketchup.render.engine.ObjMasterRenderer;
 import vbo.entities.Camera;
 import vbo.entities.Entity;
 import vbo.entities.Light;
@@ -90,6 +93,15 @@ public class Loop {
         GuiRenderer guiRenderer = new GuiRenderer(loader);
 
 
+        //***********************************************SketchUp Testen******************************************
+
+        SketchUpLoader sketchUpLoader = new SketchUpLoader(loader);
+        ObjMasterRenderer objMasterRenderer = new ObjMasterRenderer();
+
+        ObjEntity objEntity = new ObjEntity(sketchUpLoader.loadSketchUpFile("objTest/Untitled"), new Vector3f(0,0,-20), 0, 0, 0, 1);
+        //***********************************************************************************************************
+
+
 
 
         //DEBUG-------------------------
@@ -145,9 +157,19 @@ public class Loop {
 
             //renderer.processEntity(entity);
 
-            renderer.processEntity(entity1);
+            //renderer.processEntity(entity1);
 
-                renderer.render(light, camera);
+                //renderer.render(light, camera);
+
+
+
+            //*************SketchUpRendering******************
+            objEntity.increaseRotation(0.1f,0.2f,0);
+            objMasterRenderer.processEntity(objEntity);
+
+            objMasterRenderer.render(light, camera);
+            //**************************************************
+
 
             //guiRenderer.render(guis);
             //guiRenderer.testRenderFont(texturetest, new Vector2f(-0f,-0f), new Vector2f(1f,1f));
@@ -165,6 +187,7 @@ public class Loop {
         }
 
 
+        sketchUpLoader.cleanUp();
         stringRenderer.cleanUp();
         guiRenderer.cleanUp();
         renderer.cleanUp();

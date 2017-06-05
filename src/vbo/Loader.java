@@ -79,6 +79,20 @@ public class Loader {
         return textureID;
     }
 
+    public int loadTextureJpg(String fileName){
+        Texture texture = null;
+        try{
+            texture = TextureLoader.getTexture("JPG", new FileInputStream("res/"+fileName));
+        } catch (FileNotFoundException x){
+            x.printStackTrace();
+        } catch (IOException x){
+            x.printStackTrace();
+        }
+        int textureID = texture.getTextureID();
+        textures.add(textureID);
+        return textureID;
+    }
+
     public int loadTexture(BufferedImage img){
         ByteArrayOutputStream os = new ByteArrayOutputStream();
         InputStream is = null;

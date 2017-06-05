@@ -10,8 +10,14 @@ public class ModelTexture {
     private float shineDamper = 1;
     private float reflectivity = 0;
 
+    private boolean hasTexture = true;
+
     public ModelTexture(int id){
         this.textureID = id;
+    }
+
+    public ModelTexture(boolean b){
+        hasTexture = false;
     }
 
     public int getID(){
