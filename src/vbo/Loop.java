@@ -2,10 +2,13 @@ package vbo;
 
 import blöcke.Block5;
 import blöcke.IDManager3;
+import blöcke.Updater;
+import blöcke.project.minecraft.environment.Grid;
 import font.FontLoader;
 import font.two.zero.String;
 import font.two.zero.StringRenderer;
 import org.lwjgl.Sys;
+import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
@@ -99,6 +102,7 @@ public class Loop {
         ObjMasterRenderer objMasterRenderer = new ObjMasterRenderer();
 
         ObjEntity objEntity = new ObjEntity(sketchUpLoader.loadSketchUpFile("objTest/Untitled"), new Vector3f(0,0,-20), 0, 0, 0, 1);
+        objEntity = new ObjEntity(sketchUpLoader.loadSketchUpFile("objTest/ErsterGrundriss"), new Vector3f(0,0,-20), 0, 0, 0, 1);
         //***********************************************************************************************************
 
 
@@ -134,40 +138,38 @@ public class Loop {
 
 
         IDManager3 id = new IDManager3();
+        camera.setPitch(camera.getPitch()-10);
+        Updater updater = new Updater(camera);
+        Grid g = new Grid();
 
 
 
         long oldTime = 0;
         long time;
+        Mouse.setGrabbed(true);
 
         while(!Display.isCloseRequested()){
+            //updater.update();
+            //camera.move(g);
 
-            time = System.currentTimeMillis();
-            //System.out.println(time - oldTime);
-
-
-            entity.increasePosition(0,0,0);
-            camera.move();
-            entity1.increaseRotation(0f,0.2f,0);
-
-            block5.increasePosition(0,0,0);
-            block5.increaseRotation(0f,0.2f,0);
+            //entity.increasePosition(0,0,0.01f);
+            //entity.increaseRotation(0,0,0f);  //Edit dy //0.1f
 
 
 
-            //renderer.processEntity(entity);
+            renderer.processEntity(entity);
 
             //renderer.processEntity(entity1);
 
-                //renderer.render(light, camera);
+            renderer.render(light, camera);
 
 
 
             //*************SketchUpRendering******************
-            objEntity.increaseRotation(0.1f,0.2f,0);
+            /*objEntity.increaseRotation(0.1f,0.2f,0);
             objMasterRenderer.processEntity(objEntity);
 
-            objMasterRenderer.render(light, camera);
+            objMasterRenderer.render(light, camera);*/
             //**************************************************
 
 
@@ -176,7 +178,6 @@ public class Loop {
             string.setNewText(java.lang.String.valueOf(oldTime++));
 
             //stringRenderer.render(string);
-
 
 
 

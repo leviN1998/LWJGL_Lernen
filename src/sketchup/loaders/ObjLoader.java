@@ -95,7 +95,10 @@ public class ObjLoader {
     private static ObjVertex createvertex(String[] data, RawObjList list){
         int v = Integer.parseInt(data[0]) -1;
         int vt = Integer.parseInt(data[1]) -1;
-        int vn = Integer.parseInt(data[2]) -1;
+        int vn = -1;
+        vn = Integer.parseInt(data[2]) -1;
+
+
         return list.generateVertex(v,vt,vn);
     }
 
